@@ -1,16 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<md-toolbar>Welcome to {{title}}</md-toolbar>
-<div class="container" fxLayout="row" fxLayoutAlign="space-around start">
-  <md-list fxItem>
-    <h3>Members</h3>
-    <md-list-item *ngFor="let member of members" fxLayout="row">
-      <span class="member-name">{{member.name}}</span>
-      <button md-raised-button (click)="onSelect(member)"><md-icon>edit</md-icon>EDIT</button>
-    </md-list-item>
-  </md-list>
-  <app-member-detail 
-    [member]="selectedMember"
-    class="selected-member-card"
-    fxItem>
-  </app-member-detail>
-</div>
+<md-sidenav-container class="example-container">
+  <md-sidenav #sidenav class="example-sidenav">
+
+    <a routerLink="/dashboard" (click)="sidenav.close()">Dashboard</a>
+    <a routerLink="/members" (click)="sidenav.close()">Member list</a>
+  </md-sidenav>
+
+  <div class="example-sidenav-content">
+    <md-toolbar>
+      <button type="button" md-icon-button (click)="sidenav.open()">
+        <md-icon >menu</md-icon>
+      </button>
+      <span>Welcome to {{title}}</span>
+
+    </md-toolbar>
+    <router-outlet></router-outlet>
+
+  </div>
+
+</md-sidenav-container>

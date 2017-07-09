@@ -11,7 +11,11 @@ let win = null;
 app.on('ready', () => {
 
     // Initialize the window to our specified dimensions
-    win = new BrowserWindow({ width: 1000, height: 600 });
+    win = new BrowserWindow({
+        width: 1000, height: 600,
+        autoHideMenuBar: true,
+        title: 'Girya Membership'
+    });
 
     // Specify entry point
     if (process.env.PACKAGE === 'true') {

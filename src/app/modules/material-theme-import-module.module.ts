@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdToolbarModule, MdListModule, MdButtonModule, MdIconModule, MdCardModule } from '@angular/material';
+import { MdToolbarModule, MdListModule, MdButtonModule, MdIconModule, MdCardModule, MdSidenavModule } from '@angular/material';
 
 let importedMaterialModules: Array<any> = [
   FlexLayoutModule,
-  BrowserAnimationsModule, 
+  BrowserAnimationsModule,
+  MdSidenavModule,
   MdToolbarModule,
   MdListModule,
   MdButtonModule,
@@ -16,7 +17,7 @@ let importedMaterialModules: Array<any> = [
 ];
 
 @NgModule({
-  imports: [].concat(CommonModule,importedMaterialModules),
+  imports: [].concat(CommonModule, importedMaterialModules),
   exports: importedMaterialModules,
   declarations: []
 })

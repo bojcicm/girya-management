@@ -17,6 +17,5 @@
         "**/.git/subtree-cache/**": true,
         "**/node_modules/*/**": true
     },
-    "html.format.wrapAttributes": "force-aligned",
     "editor.formatOnSave": true
 }

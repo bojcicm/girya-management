@@ -1,0 +1,20 @@
+<p *ngIf="isLoading">Loading member list</p>
+
+<div class="container"
+     fxLayout="row"
+     fxLayoutAlign="space-around start"
+     *ngIf="!isLoading">
+  <md-list fxItem>
+    <h3>Members</h3>
+    <md-list-item *ngFor="let member of members"
+                  fxLayout="row">
+      <span class="member-name">{{member.name}}</span>
+      <button md-raised-button
+              (click)="onSelect(member)"><md-icon>edit</md-icon>EDIT</button>
+    </md-list-item>
+  </md-list>
+  <app-member-detail [member]="selectedMember"
+                     class="selected-member-card"
+                     fxItem>
+  </app-member-detail>
+</div>
