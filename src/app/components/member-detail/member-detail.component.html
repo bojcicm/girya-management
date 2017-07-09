@@ -1,0 +1,7 @@
+<div *ngIf="member">
+  <md-card>
+    <md-card-title>Selected member</md-card-title>
+    <md-card-content>{{member.name}}</md-card-content>
+    <input [(ngModel)]="member.name" placeholder="name"/>
+  </md-card>
+</div>
