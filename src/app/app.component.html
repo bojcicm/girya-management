@@ -1,16 +1,16 @@
-<md-sidenav-container class="example-container">
-  <md-sidenav #sidenav class="example-sidenav">
+<md-sidenav-container class="app-container">
+  <md-sidenav #sidenav>
 
-    <a routerLink="/dashboard" (click)="sidenav.close()">Dashboard</a>
-    <a routerLink="/members" (click)="sidenav.close()">Member list</a>
+    <a routerLink="/dashboard" routerLinkActive="active" (click)="sidenav.close()">Dashboard</a>
+    <a routerLink="/members" routerLinkActive="active" (click)="sidenav.close()">Member list</a>
   </md-sidenav>
 
-  <div class="example-sidenav-content">
+  <div>
     <md-toolbar>
       <button type="button" md-icon-button (click)="sidenav.open()">
         <md-icon >menu</md-icon>
       </button>
-      <span>Welcome to {{title}}</span>
+      <span>{{title}}</span>
 
     </md-toolbar>
     <router-outlet></router-outlet>

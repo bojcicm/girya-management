@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CdkTableModule } from '@angular/cdk';
 
 import { MaterialThemeImportModuleModule } from './modules/material-theme-import-module.module';
 import { AppRoutingModule } from './modules/app-routing.module'
@@ -22,8 +23,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   imports: [
     BrowserModule,
     FormsModule,
+    CdkTableModule,
     AppRoutingModule,
     MaterialThemeImportModuleModule
+  ],
+  entryComponents: [
+    MemberDetailComponent
   ],
   providers: [MemberService],
   bootstrap: [AppComponent]

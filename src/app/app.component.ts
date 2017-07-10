@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
+  title: string;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .map(() => this.route)
+      .map(route => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      })
+      .filter(route => route.outlet === 'primary')
+      .mergeMap(route => route.data)
+      .subscribe((event) => this.title = event['title']);
+  }
 }

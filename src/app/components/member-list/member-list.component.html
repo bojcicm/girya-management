@@ -1,20 +1,30 @@
 <p *ngIf="isLoading">Loading member list</p>
 
-<div class="container"
-     fxLayout="row"
-     fxLayoutAlign="space-around start"
-     *ngIf="!isLoading">
-  <md-list fxItem>
-    <h3>Members</h3>
-    <md-list-item *ngFor="let member of members"
-                  fxLayout="row">
-      <span class="member-name">{{member.name}}</span>
-      <button md-raised-button
-              (click)="onSelect(member)"><md-icon>edit</md-icon>EDIT</button>
-    </md-list-item>
-  </md-list>
-  <app-member-detail [member]="selectedMember"
-                     class="selected-member-card"
-                     fxItem>
-  </app-member-detail>
+<div *ngIf="!isLoading" class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <md-input-container floatPlaceholder="never">
+      <input mdInput #filter placeholder="Filter members">
+    </md-input-container>
+  </div>
+
+  <md-table #table [dataSource]="memberDataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container cdkColumnDef="memberId">
+      <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="userName">
+      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
 </div>

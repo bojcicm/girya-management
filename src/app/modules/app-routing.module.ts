@@ -6,9 +6,9 @@ import { MemberListComponent } from '../components/member-list/member-list.compo
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'members', component: MemberListComponent }
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
+  { path: 'members', component: MemberListComponent, data: { title: 'Members List' } }
   // { path: 'members/:id', component: MemberDetailsComponent}
 ]
 

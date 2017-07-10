@@ -1,7 +1,11 @@
 <div *ngIf="member">
-  <md-card>
-    <md-card-title>Selected member</md-card-title>
-    <md-card-content>{{member.name}}</md-card-content>
-    <input [(ngModel)]="member.name" placeholder="name"/>
-  </md-card>
+  <h2 md-dialog-title>Selected member</h2>
+  <md-card-content>{{member.name}}</md-card-content>
+  <input [(ngModel)]="member.name" placeholder="name" />
+
+  <md-dialog-actions>
+    <button md-button md-dialog-close>Cancel</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button md-button [md-dialog-close]="true">Save</button>
+  </md-dialog-actions>
 </div>

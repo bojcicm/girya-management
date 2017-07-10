@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Inject, Optional, OnInit } from '@angular/core';
+import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 import { Member } from '../../model/member';
-import { MemberService } from '../../services/member/member.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -9,21 +9,15 @@ import { MemberService } from '../../services/member/member.service';
 })
 
 export class MemberDetailComponent implements OnInit {
+  member: Member;
 
-  @Input() member: Member;
-
-  members: Member[];
-  selectedMember: Member;
-
-  constructor(private memberService: MemberService) { }
-  ngOnInit(): void {
-    this.memberService.getMembers().then((members) => {
-      this.members = members;
-    })
+  constructor(
+    private dialogRef: MdDialogRef<MemberDetailComponent>,
+    @Optional() @Inject(MD_DIALOG_DATA) public data: any) {
   }
 
-  onSelect(member: Member) {
-    this.selectedMember = member;
+  ngOnInit() {
+    debugger;
+    this.member = this.data.member;
   }
-
 }

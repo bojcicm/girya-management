@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdToolbarModule, MdListModule, MdButtonModule, MdIconModule, MdCardModule, MdSidenavModule } from '@angular/material';
+import {
+  MdToolbarModule, MdListModule, MdButtonModule,
+  MdIconModule, MdCardModule, MdSidenavModule,
+  MdDialogModule, MdTableModule, MdInputModule
+} from '@angular/material';
 
 let importedMaterialModules: Array<any> = [
   FlexLayoutModule,
@@ -13,7 +17,10 @@ let importedMaterialModules: Array<any> = [
   MdListModule,
   MdButtonModule,
   MdIconModule,
-  MdCardModule
+  MdCardModule,
+  MdDialogModule,
+  MdTableModule,
+  MdInputModule
 ];
 
 @NgModule({
