@@ -1,6 +1,4 @@
-<p *ngIf="isLoading">Loading member list</p>
-
-<div *ngIf="!isLoading" class="example-container mat-elevation-z8">
+<div class="example-container mat-elevation-z8">
   <div class="example-header">
     <md-input-container floatPlaceholder="never">
       <input mdInput #filter placeholder="Filter members">
@@ -13,15 +11,23 @@
           The actual rendered columns are set as a property on the row definition" -->
 
     <!-- ID Column -->
-    <ng-container cdkColumnDef="memberId">
-      <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
+    <ng-container cdkColumnDef="id">
+      <md-header-cell *cdkHeaderCellDef> Id</md-header-cell>
       <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container cdkColumnDef="userName">
+    <ng-container cdkColumnDef="name">
       <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+      <md-cell *cdkCellDef="let row"> {{row.name}}</md-cell>
+    </ng-container>
+
+
+    <ng-container cdkColumnDef="info">
+      <md-header-cell *cdkHeaderCellDef> Info </md-header-cell>
+      <md-cell *cdkCellDef="let row">
+        <md-icon (click)="onSelect(row)">info</md-icon>
+      </md-cell>
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>

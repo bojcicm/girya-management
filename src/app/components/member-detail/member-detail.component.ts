@@ -17,7 +17,6 @@ export class MemberDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.member = this.data.member;
   }
 }
