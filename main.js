@@ -14,7 +14,8 @@ app.on('ready', () => {
     win = new BrowserWindow({
         width: 1000, height: 600,
         autoHideMenuBar: true,
-        title: 'Girya Membership'
+        title: 'Girya Membership',
+        icon: 'src/favicon.ico'
     });
 
     // Specify entry point
