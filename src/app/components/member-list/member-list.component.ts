@@ -20,20 +20,20 @@ import 'rxjs/add/observable/fromEvent';
 })
 
 export class MemberListComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'info'];
+  displayedColumns = ['name', 'phoneNumber', 'info'];
   memberDataSource: ExampleDataSource | null;
-  exampleDatabase = new ExampleDatabase(this.memberService);
   selectedMember: Member;
-  memberDialogRef: MdDialog;
+  //memberDialogRef: MdDialog;
 
   @ViewChild('filter') filter: ElementRef;
 
   constructor(
     private memberService: MemberService,
-    private dialog: MdDialog) { }
+    private dialog: MdDialog,
+  ) { }
 
   ngOnInit(): void {
-    this.memberDataSource = new ExampleDataSource(this.exampleDatabase);
+    this.memberDataSource = new ExampleDataSource(this.memberService);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
@@ -54,24 +54,6 @@ export class MemberListComponent implements OnInit {
 
 }
 
-/** An example database that the data source uses to retrieve data for the table. */
-export class ExampleDatabase {
-  /** Stream that emits whenever the data has been modified. */
-  dataChange: BehaviorSubject<Member[]> = new BehaviorSubject<Member[]>([]);
-  get data(): Member[] { return this.dataChange.value; }
-
-  constructor(private memberService: MemberService) {
-    // Fill up the database with 100 users.
-    this.memberService.getMembers().then((members) => {
-      members.forEach(member => {
-        let copiedData = this.data.slice();
-        copiedData.push(member);
-        this.dataChange.next(copiedData);
-      });
-    });
-  }
-}
-
 /**
  * Data source to provide what data should be rendered in the table. Note that the data source
  * can retrieve its data in any way. In this case, the data source is provided a reference
@@ -84,19 +66,20 @@ export class ExampleDataSource extends DataSource<any> {
   get filter(): string { return this._filterChange.value; }
   set filter(filter: string) { this._filterChange.next(filter); }
 
-  constructor(private _exampleDatabase: ExampleDatabase) {
+  constructor(private memberService: MemberService) {
     super();
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Member[]> {
     const displayDataChanges = [
-      this._exampleDatabase.dataChange,
-      this._filterChange,
+      this.memberService.dataChange,
+      this._filterChange
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      return this._exampleDatabase.data.slice().filter((item: Member) => {
+      const data = this.memberService.data.slice();
+      return data.filter((item: Member) => {
         let searchStr = (item.name).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) != -1;
       });

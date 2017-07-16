@@ -7,21 +7,16 @@
 
   <md-table #table [dataSource]="memberDataSource">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- ID Column -->
-    <ng-container cdkColumnDef="id">
-      <md-header-cell *cdkHeaderCellDef> Id</md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
-    </ng-container>
-
     <!-- Name Column -->
     <ng-container cdkColumnDef="name">
       <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
       <md-cell *cdkCellDef="let row"> {{row.name}}</md-cell>
     </ng-container>
 
+    <ng-container cdkColumnDef="phoneNumber">
+      <md-header-cell *cdkHeaderCellDef> Phone Number </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.phoneNumber}}</md-cell>
+    </ng-container>
 
     <ng-container cdkColumnDef="info">
       <md-header-cell *cdkHeaderCellDef> Info </md-header-cell>

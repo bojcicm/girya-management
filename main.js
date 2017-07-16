@@ -15,10 +15,9 @@ app.on('ready', () => {
         width: 1000, height: 600,
         autoHideMenuBar: true,
         title: 'Girya Membership',
-        icon: 'src/favicon.ico'
+        icon: 'src/favicon.ico',
+        nodeIntegration: true
     });
-
-    // Specify entry point
     if (process.env.PACKAGE === 'true') {
         win.loadURL(url.format({
             pathname: path.join(__dirname, 'dist/index.html'),
@@ -30,11 +29,9 @@ app.on('ready', () => {
         win.webContents.openDevTools();
     }
 
-    // Remove window once app is closed
     win.on('closed', () => {
         win = null;
     });
-
 });
 
 app.on('activate', () => {

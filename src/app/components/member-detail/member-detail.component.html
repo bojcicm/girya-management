@@ -1,7 +1,14 @@
 <div *ngIf="member">
   <h2 md-dialog-title>Selected member</h2>
-  <md-card-content>{{member.name}}</md-card-content>
-  <input [(ngModel)]="member.name" placeholder="name" />
+  <md-card-content>
+    {{member.name}} - {{member.phoneNumber}}
+    <ul>
+      <li *ngFor="let payment of member.subscriptionPayments">
+        {{payment.forMonth}} - {{payment.datePaid}} - {{payment.isPaid}}
+      </li>
+    </ul>
+  </md-card-content>
+
 
   <md-dialog-actions>
     <button md-button md-dialog-close>Cancel</button>

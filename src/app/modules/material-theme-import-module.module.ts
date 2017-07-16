@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MdToolbarModule, MdListModule, MdButtonModule,
   MdIconModule, MdCardModule, MdSidenavModule,
-  MdDialogModule, MdTableModule, MdInputModule
+  MdDialogModule, MdTableModule, MdInputModule,
+  MdDatepickerModule, MdNativeDateModule, MdCheckboxModule, MdProgressSpinnerModule
 } from '@angular/material';
 
 let importedMaterialModules: Array<any> = [
@@ -20,7 +21,11 @@ let importedMaterialModules: Array<any> = [
   MdCardModule,
   MdDialogModule,
   MdTableModule,
-  MdInputModule
+  MdInputModule,
+  MdDatepickerModule,
+  MdNativeDateModule,
+  MdCheckboxModule,
+  MdProgressSpinnerModule
 ];
 
 @NgModule({

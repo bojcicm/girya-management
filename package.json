@@ -24,13 +24,13 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/nedb": "^1.8.3",
     "core-js": "^2.4.1",
     "dotenv": "^4.0.0",
     "electron-reload": "^1.2.1",
+    "nedb": "^1.8.0",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.1.0",
-    "sqlite3": "^3.1.8",
-    "typeorm": "0.1.0-alpha.31",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

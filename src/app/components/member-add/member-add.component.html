@@ -1,0 +1,44 @@
+<h2 md-dialog-title>Add new member</h2>
+
+<form>
+  <md-card-content>
+    <div class="row">
+      <div class="col-xs-6">
+        <md-input-container>
+          <input mdInput [disabled]="isSavingInProcess" placeholder="Full name of member">
+        </md-input-container>
+      </div>
+      <div class="col-xs-6">
+        <md-input-container>
+          <input mdInput [disabled]="isSavingInProcess" placeholder="Phone number">
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <md-input-container>
+          <input mdInput [disabled]="isSavingInProcess" placeholder="Choose a starting date" [mdDatepicker]="myDatepicker">
+          <button mdSuffix [disabled]="isSavingInProcess" [mdDatepickerToggle]="myDatepicker"></button>
+        </md-input-container>
+        <md-datepicker #myDatepicker></md-datepicker>
+      </div>
+      <div class="col-xs-6">
+        <md-checkbox [disabled]="isSavingInProcess" class="checkbox-margin" [(ngModel)]="isFormValid">Uplatio za tekuci mjesec?</md-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <md-input-container style="width: 100%;">
+          <textarea [disabled]="isSavingInProcess" mdInput style="min-height:60px;" placeholder="Subscription details"></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </md-card-content>
+
+
+  <md-dialog-actions>
+    <button md-button [disabled]="isSavingInProcess" md-dialog-close>Cancel</button>
+    <button md-button [disabled]="isSavingInProcess" (click)="onSave()">Save</button>
+    <md-progress-spinner class="spinner-size" *ngIf="isSavingInProcess" mode="indeterminate"></md-progress-spinner>
+  </md-dialog-actions>
+</form>

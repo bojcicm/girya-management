@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Member } from '../../model/member';
-
-
-const MEMBERS: Member[] = [
-  { id: 1, name: 'Mate Matic1', phoneNumber: '' },
-  { id: 1, name: 'Mate Matic2', phoneNumber: '' },
-  { id: 1, name: 'Mate Matic3', phoneNumber: '' },
-  { id: 1, name: 'Mate Matic4', phoneNumber: '' },
-  { id: 1, name: 'Mate Matic5', phoneNumber: '' },
-  { id: 1, name: 'Mate Matic6', phoneNumber: '' },
-  { id: 1, name: 'Mate Matic7', phoneNumber: '' },
-  { id: 1, name: 'Mate Matic8', phoneNumber: '' },
-]
+import { DataService } from '../data/data.service';
+import * as DataStore from 'nedb';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class MemberService {
+  private db: DataStore = this.databaseService.db;
+  dataChange: BehaviorSubject<Member[]> = new BehaviorSubject<Member[]>([]);
 
-  constructor() { }
-
-  getMembers(): Promise<Member[]> {
-    return Promise.resolve(MEMBERS);
+  constructor(private databaseService: DataService) {
+    this.databaseService.getMembers().then((members) => {
+      members.forEach(member => {
+        let copiedData = this.data.slice();
+        copiedData.push(member);
+        this.dataChange.next(copiedData);
+      });
+    });
   }
+
+  /** Stream that emits whenever the data has been modified. */
+  get data(): Member[] { return this.dataChange.value; }
 }

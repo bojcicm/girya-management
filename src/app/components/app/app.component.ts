@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { DataService } from '../../services/data/data.service';
 import 'rxjs/add/operator/mergeMap';
 
 @Component({
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private dataService: DataService) { }
 
   ngOnInit() {
     this.router.events
