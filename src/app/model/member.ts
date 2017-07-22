@@ -4,16 +4,14 @@ export class Member {
     phoneNumber: string;
     membershipSubscription: string;
     subscriptionPayments: PaidSubscription[];
-    isActive: boolean;
+    isActive: boolean = true;
 
     constructor() {
     }
 }
 
 export class PaidSubscription {
-    forMonth: number;
-    datePaid: Date;
-    dateExpectedToPay: Date;
+    subscriptionDate: Date;
     isPaid: boolean = false;
 
     constructor() {

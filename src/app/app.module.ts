@@ -6,7 +6,6 @@ import { CdkTableModule } from '@angular/cdk';
 import { MaterialThemeImportModuleModule } from './modules/material-theme-import-module.module';
 import { AppRoutingModule } from './modules/app-routing.module'
 
-import { MemberService } from './services/member/member.service';
 import { DataService } from './services/data/data.service';
 
 import { AppComponent } from './components/app/app.component';
@@ -33,7 +32,7 @@ import { MemberAddComponent } from './components/member-add/member-add.component
   entryComponents: [
     MemberDetailComponent, MemberAddComponent
   ],
-  providers: [MemberService, DataService],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

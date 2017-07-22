@@ -4,7 +4,7 @@ import { DataSource } from '@angular/cdk';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Member } from '../../model/member';
-import { MemberService } from '../../services/member/member.service';
+import { DataService } from '../../services/data/data.service';
 import { MemberDetailComponent } from '../member-detail/member-detail.component';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -23,17 +23,16 @@ export class MemberListComponent implements OnInit {
   displayedColumns = ['name', 'phoneNumber', 'info'];
   memberDataSource: ExampleDataSource | null;
   selectedMember: Member;
-  //memberDialogRef: MdDialog;
 
   @ViewChild('filter') filter: ElementRef;
 
   constructor(
-    private memberService: MemberService,
+    private dataService: DataService,
     private dialog: MdDialog,
   ) { }
 
   ngOnInit(): void {
-    this.memberDataSource = new ExampleDataSource(this.memberService);
+    this.memberDataSource = new ExampleDataSource(this.dataService);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
@@ -66,19 +65,19 @@ export class ExampleDataSource extends DataSource<any> {
   get filter(): string { return this._filterChange.value; }
   set filter(filter: string) { this._filterChange.next(filter); }
 
-  constructor(private memberService: MemberService) {
+  constructor(private dataService: DataService) {
     super();
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Member[]> {
     const displayDataChanges = [
-      this.memberService.dataChange,
+      this.dataService.dataChange,
       this._filterChange
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      const data = this.memberService.data.slice();
+      const data = this.dataService.data.slice();
       return data.filter((item: Member) => {
         let searchStr = (item.name).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) != -1;
