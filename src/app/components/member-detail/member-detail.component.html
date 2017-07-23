@@ -8,7 +8,14 @@
     <p><b>Detalji o preplati: </b>{{member.membershipSubscription}}</p>
   </md-card>
   <md-list>
-    <h3 md-subheader>Uplate</h3>
+    <div class="row">
+      <div class="col-xs-10">
+        <h3 md-subheader>Uplate</h3>
+      </div>
+      <div class="col-xs-2" *ngIf="areAllPaymentsPaid()">
+        <button md-button (click)="paySubscription()">Dodaj uplatu</button>
+      </div>
+    </div>
     <md-divider></md-divider>
     <md-list-item *ngFor="let payment of memberPayments">
       <md-icon md-list-icon *ngIf="payment.isPaid">done</md-icon>

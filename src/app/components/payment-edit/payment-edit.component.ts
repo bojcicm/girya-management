@@ -12,19 +12,30 @@ import * as moment from 'moment';
 export class PaymentEditComponent implements OnInit {
   @ViewChild(MdDatepicker) datepicker: MdDatepicker<Date>;
   monthsInAdvance: number;
+  subscriptionDate: Date;
   isInAdvance: boolean;
+  isMemberStaying: boolean = true;
   isSavingInProcess: boolean;
   member: Member;
   subscriptionPayment: PaidSubscription;
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
+    @Inject(MD_DIALOG_DATA) public data: IPaymentDialogData,
     private dialogRef: MdDialogRef<PaymentEditComponent>,
     private dataService: DataService) { }
 
   ngOnInit() {
-    this.member = this.data.member;
-    this.subscriptionPayment = this.data.payment;
+    if (this.data && this.data.member)
+      this.member = this.data.member;
+
+    if (this.data && this.data.payment) {
+      this.subscriptionPayment = this.data.payment;
+      this.subscriptionDate = this.data.payment.subscriptionDate;
+    }
+    else {
+      this.subscriptionPayment = new PaidSubscription();
+      this.subscriptionDate = new Date();
+    }
   }
 
   onSubmit() {
@@ -35,14 +46,22 @@ export class PaymentEditComponent implements OnInit {
       this.subscriptionPayment.paidInAdvance = this.monthsInAdvance;
     }
 
-    let nextSubscription = new PaidSubscription();
-    let nextMonth = this.isInAdvance ? this.monthsInAdvance : 1;
-    nextSubscription.subscriptionDate = moment(this.subscriptionPayment.subscriptionDate).add(nextMonth, 'M').toDate();
-    this.member.subscriptionPayments.push(nextSubscription);
+    if (this.isMemberStaying) {
+      let nextSubscription = new PaidSubscription();
+      let nextMonth = this.isInAdvance ? this.monthsInAdvance : 1;
+      nextSubscription.subscriptionDate = moment(this.subscriptionPayment.subscriptionDate).add(nextMonth, 'M').toDate();
+      this.member.subscriptionPayments.push(nextSubscription);
+      this.member.isActive = false;
+    }
     this.dataService.updateMember(this.member).then(member => {
       this.isSavingInProcess = false;
       this.dialogRef.close();
     });
   }
 
+}
+
+interface IPaymentDialogData {
+  member: Member;
+  payment?: PaidSubscription;
 }

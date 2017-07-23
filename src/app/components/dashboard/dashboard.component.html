@@ -1,40 +1,33 @@
-<div class="dashboard-container">
-  <p>
-    dashboard works!
-  </p>
-  <div class="row">
-    <div class="col-xs-6">
-      <md-card>
-        <md-card-title>Upcoming members to pay</md-card-title>
-        <md-card-content>
-          <md-list>
-            <md-list-item *ngFor="let dto of getActiveMembersWithPendingPayment">
-              <div class="row">
-                <div class="col-xs-8">{{dto.member}} - {{dto.subscriptionDate | date:"dd - MMMM - y"}}</div>
-                <div class="col-xs-4">
-                  <md-icon>info</md-icon>
-                </div>
-              </div>
-            </md-list-item>
-          </md-list>
-        </md-card-content>
-      </md-card>
-    </div>
-    <div class="col-xs-6">
-      <md-card>
-        <md-card-title>Members late to pay</md-card-title>
-        <md-card-content>
-          <md-list>
-            <md-list-item *ngFor="let member of getActiveMembersWithMissedPayment">
-              {{member.name}} - Datum placanja: {{member.subscriptionPayments[0].subscriptionDate | date:"dd/MMMM/y"}}
-              <md-icon>info</md-icon>
-            </md-list-item>
-          </md-list>
-        </md-card-content>
-      </md-card>
-    </div>
+<div class="row">
+  <div class="col-xs-6">
+    <md-card>
+      <md-card-title>Nadolazece clanarine</md-card-title>
+      <md-card-content>
+        <md-list>
+          <md-list-item *ngFor="let dto of getActiveMembersWithPendingPayment">
+            <md-icon md-list-icon>info</md-icon>
+            <p md-line>{{member.name}} </p>
+            <p md-line>Datum placanja: {{member.subscriptionPayments[0].subscriptionDate | date:"dd/MMMM/y"}}</p>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+    </md-card>
   </div>
-
-  <button (click)="dropDb()"> drop db </button>
-  <button md-fab class="add-member-fab" (click)="openAddMemberDialog()"><md-icon>add</md-icon></button>
+  <div class="col-xs-6">
+    <md-card>
+      <md-card-title>Zakasnjele clanarine</md-card-title>
+      <md-card-content>
+        <md-list>
+          <md-list-item *ngFor="let member of getActiveMembersWithMissedPayment">
+            <md-icon md-list-icon>warning</md-icon>
+            <p md-line>{{member.name}} </p>
+            <p md-line>Datum placanja: {{member.subscriptionPayments[0].subscriptionDate | date:"dd/MMMM/y"}}</p>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+    </md-card>
+  </div>
 </div>
+
+<button (click)="dropDb()"> drop db </button>
+<button md-fab class="add-member-fab" (click)="openAddMemberDialog()"><md-icon>add</md-icon></button>

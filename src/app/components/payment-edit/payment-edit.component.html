@@ -12,13 +12,19 @@
       </div>
     </div>
     <div class="row">
+      <md-checkbox [(ngModel)]="isMemberStaying" name="isMemberStaying" [disabled]="isSavingInProcess">
+        Član nastavlja preplatu?
+      </md-checkbox>
+    </div>
+    <div class="row">
       <md-checkbox [(ngModel)]="isInAdvance" name="isInAdvance" [disabled]="isSavingInProcess">
-        Placa li se vise uplata?
+        Plaća li se više uplata?
       </md-checkbox>
     </div>
     <div class="row">
       <md-input-container *ngIf="isInAdvance">
-        <input type="number" mdInput [disabled]="isSavingInProcess" placeholder="Koliko uplata?" [(ngModel)]="monthsInAdvance" name="monthsInAdvance">
+        <input type="number" min="1" mdInput [disabled]="isSavingInProcess" placeholder="Koliko uplata?" [(ngModel)]="monthsInAdvance"
+          name="monthsInAdvance">
       </md-input-container>
     </div>
   </md-dialog-content>

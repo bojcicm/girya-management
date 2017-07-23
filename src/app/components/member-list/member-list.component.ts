@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { MdDialog, MdDialogConfig } from '@angular/material';
+import { MdDialog, MdDialogConfig, MdSnackBar } from '@angular/material';
 import { DataSource } from '@angular/cdk';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Member } from '../../model/member';
 import { DataService } from '../../services/data/data.service';
 import { MemberDetailComponent } from '../member-detail/member-detail.component';
+import { MemberAddComponent } from '../member-add/member-add.component';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
@@ -30,7 +31,8 @@ export class MemberListComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private dialog: MdDialog,
-    private router: Router
+    private router: Router,
+    private snackBar: MdSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,21 @@ export class MemberListComponent implements OnInit {
         if (!this.memberDataSource) { return; }
         this.memberDataSource.filter = this.filter.nativeElement.value;
       });
+  }
+
+  openAddMemberDialog() {
+    let memberDialogConfig = new MdDialogConfig();
+    memberDialogConfig.width = '500px';
+    memberDialogConfig.data = {};
+
+    let memberDialog = this.dialog.open(MemberAddComponent, memberDialogConfig);
+    memberDialog.afterClosed().subscribe(result => {
+      if (result && result.name) {
+        let snackBarRef = this.snackBar.open('User saved: ' + result.name, null, {
+          duration: 2000
+        });
+      }
+    });
   }
 
   onSelect(member: Member) {

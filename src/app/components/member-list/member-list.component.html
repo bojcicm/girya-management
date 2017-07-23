@@ -1,7 +1,8 @@
 <div class="example-container mat-elevation-z8">
   <div class="example-header">
+    <button md-button (click)="openAddMemberDialog()">Dodaj člana</button>
     <md-input-container floatPlaceholder="never">
-      <input mdInput #filter placeholder="Filter members">
+      <input mdInput #filter placeholder="Pretraži po imenu">
     </md-input-container>
   </div>
 
@@ -9,17 +10,17 @@
 
     <!-- Name Column -->
     <ng-container cdkColumnDef="name">
-      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+      <md-header-cell *cdkHeaderCellDef> Puno ime </md-header-cell>
       <md-cell *cdkCellDef="let row"> {{row.name}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="phoneNumber">
-      <md-header-cell *cdkHeaderCellDef> Phone Number </md-header-cell>
+      <md-header-cell *cdkHeaderCellDef> Kontakt broj </md-header-cell>
       <md-cell *cdkCellDef="let row"> {{row.phoneNumber}}</md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="info">
-      <md-header-cell *cdkHeaderCellDef> Info </md-header-cell>
+      <md-header-cell *cdkHeaderCellDef> Detalji </md-header-cell>
       <md-cell *cdkCellDef="let row">
         <a (click)="onSelect(row)">
           <md-icon>info</md-icon>

@@ -35,6 +35,10 @@ export class MemberDetailComponent implements OnInit {
     });
   }
 
+  areAllPaymentsPaid(): boolean {
+    return this.member.subscriptionPayments.every(p => p.isPaid);
+  }
+
   paySubscription(payment: PaidSubscription) {
     let paymentDialogConfig = new MdDialogConfig();
     paymentDialogConfig.width = '500px';
