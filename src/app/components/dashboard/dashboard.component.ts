@@ -3,6 +3,7 @@ import { DataService } from '../../services/data/data.service';
 import { Member, PaidSubscription } from '../../model/member';
 import { MemberAddComponent } from '../member-add/member-add.component';
 import { MdDialog, MdDialogConfig, MdSnackBar } from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,13 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+  }
+
+  dropDb() {
+    var a = this.getActiveMembersWithPendingPayment;
+    var b = this.getActiveMembersWithMissedPayment;
+    //this.dataService.dropdb();
   }
 
   openAddMemberDialog() {
@@ -32,6 +40,34 @@ export class DashboardComponent implements OnInit {
           duration: 2000
         });
       }
+    });
+  }
+
+  get getActiveMembersWithPendingPayment(): Member[] {
+    let today = moment();
+    let members = this.dataService.allMembers;
+    if (!members) return null;
+    return members.filter(member => {
+      let memberSubscriptions = member.subscriptionPayments;
+      let latestSubscription = memberSubscriptions.sort((a, b) => <any>b.subscriptionDate - <any>a.subscriptionDate)[0];
+      let subscriptionDate = moment(latestSubscription.subscriptionDate);
+      let daydiff = today.diff(subscriptionDate, 'days');
+      if (daydiff >= 0 && daydiff <= 7 && !latestSubscription.isPaid)
+        return member;
+    });
+  }
+
+  get getActiveMembersWithMissedPayment() {
+    let today = moment();
+    let members = this.dataService.allMembers;
+    if (!members) return null;
+    return members.filter(member => {
+      let memberSubscriptions = member.subscriptionPayments;
+      let latestSubscription = memberSubscriptions.sort((a, b) => <any>b.subscriptionDate - <any>a.subscriptionDate)[0];
+      let subscriptionDate = moment(latestSubscription.subscriptionDate);
+      let daydiff = today.diff(subscriptionDate, 'days');
+      if (daydiff > 7 && !latestSubscription.isPaid)
+        return member;
     });
   }
 }

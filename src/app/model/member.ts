@@ -19,6 +19,7 @@ export class Member {
 export class PaidSubscription {
     subscriptionDate: Date;
     isPaid: boolean = false;
+    paidInAdvance: number = 0;
 
     constructor() {
     }

@@ -13,6 +13,7 @@ import { MemberDetailComponent } from './components/member-detail/member-detail.
 import { MemberListComponent } from './components/member-list/member-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MemberAddComponent } from './components/member-add/member-add.component';
+import { PaymentEditComponent } from './components/payment-edit/payment-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MemberAddComponent } from './components/member-add/member-add.component
     MemberDetailComponent,
     MemberListComponent,
     DashboardComponent,
-    MemberAddComponent
+    MemberAddComponent,
+    PaymentEditComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,7 @@ import { MemberAddComponent } from './components/member-add/member-add.component
     MaterialThemeImportModuleModule
   ],
   entryComponents: [
-    MemberDetailComponent, MemberAddComponent
+    MemberDetailComponent, MemberAddComponent, PaymentEditComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -1,7 +1,9 @@
 import { Component, Input, Inject, Optional, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Member } from '../../model/member';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Member, PaidSubscription } from '../../model/member';
 import { DataService } from '../../services/data/data.service';
+import { MdDialog, MdDialogConfig } from '@angular/material';
+import { PaymentEditComponent } from '../payment-edit/payment-edit.component';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -15,8 +17,8 @@ export class MemberDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private dataService: DataService) {
+    private dataService: DataService,
+    private dialog: MdDialog) {
   }
 
   ngOnInit() {
@@ -27,7 +29,20 @@ export class MemberDetailComponent implements OnInit {
       }).subscribe((member: Member) => this.member = member);
   }
 
-  goToMembersList() {
-    this.router.navigate(['/members']);
+  get memberPayments() {
+    return this.member.subscriptionPayments.sort((a, b) => {
+      return <any>b.subscriptionDate - <any>a.subscriptionDate;
+    });
+  }
+
+  paySubscription(payment: PaidSubscription) {
+    let paymentDialogConfig = new MdDialogConfig();
+    paymentDialogConfig.width = '500px';
+    paymentDialogConfig.data = {
+      payment: payment,
+      member: this.member
+    };
+
+    let paymentDialog = this.dialog.open(PaymentEditComponent, paymentDialogConfig);
   }
 }
