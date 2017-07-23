@@ -21,7 +21,9 @@
     <ng-container cdkColumnDef="info">
       <md-header-cell *cdkHeaderCellDef> Info </md-header-cell>
       <md-cell *cdkCellDef="let row">
-        <md-icon (click)="onSelect(row)">info</md-icon>
+        <a (click)="onSelect(row)">
+          <md-icon>info</md-icon>
+        </a>
       </md-cell>
     </ng-container>
 

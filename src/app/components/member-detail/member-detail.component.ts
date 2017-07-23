@@ -1,6 +1,8 @@
 import { Component, Input, Inject, Optional, OnInit } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Member } from '../../model/member';
+import { DataService } from '../../services/data/data.service';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-member-detail',
@@ -12,11 +14,20 @@ export class MemberDetailComponent implements OnInit {
   member: Member;
 
   constructor(
-    private dialogRef: MdDialogRef<MemberDetailComponent>,
-    @Optional() @Inject(MD_DIALOG_DATA) public data: any) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataService: DataService) {
   }
 
   ngOnInit() {
-    this.member = this.data.member;
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        let memberId = params.get('id');
+        return this.dataService.getMembers().then(members => members.find(m => m._id == memberId));
+      }).subscribe((member: Member) => this.member = member);
+  }
+
+  goToMembersList() {
+    this.router.navigate(['/members']);
   }
 }

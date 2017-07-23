@@ -1,18 +1,14 @@
-<div *ngIf="member">
-  <h2 md-dialog-title>Selected member</h2>
+<a (click)="goToMembersList()">
+  <md-icon>arrow back</md-icon>
+</a>
+<div>
+  <h2>Selected member</h2>
   <md-card-content>
     {{member.name}} - {{member.phoneNumber}}
     <ul>
       <li *ngFor="let payment of member.subscriptionPayments">
-        {{payment.forMonth}} - {{payment.datePaid}} - {{payment.isPaid}}
+        {{payment}}
       </li>
     </ul>
   </md-card-content>
-
-
-  <md-dialog-actions>
-    <button md-button md-dialog-close>Cancel</button>
-    <!-- Can optionally provide a result for the closing dialog. -->
-    <button md-button [md-dialog-close]="true">Save</button>
-  </md-dialog-actions>
 </div>

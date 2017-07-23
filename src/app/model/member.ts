@@ -1,5 +1,5 @@
 export class Member {
-    _id: number;
+    _id: string;
     name: string;
     phoneNumber: string;
     membershipSubscription: string;
@@ -7,6 +7,12 @@ export class Member {
     isActive: boolean = true;
 
     constructor() {
+    }
+
+    get lastSubscriptionStatus(): PaidSubscription {
+        if (!this.subscriptionPayments)
+            return null;
+        return this.subscriptionPayments[0];
     }
 }
 

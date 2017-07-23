@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MdDialog, MdDialogConfig } from '@angular/material';
 import { DataSource } from '@angular/cdk';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Member } from '../../model/member';
@@ -29,6 +30,7 @@ export class MemberListComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private dialog: MdDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,12 +45,7 @@ export class MemberListComponent implements OnInit {
   }
 
   onSelect(member: Member) {
-    let memberDialogConfig = new MdDialogConfig();
-    memberDialogConfig.height = '400px';
-    memberDialogConfig.width = '400px';
-    memberDialogConfig.data = { member };
-
-    let a = this.dialog.open(MemberDetailComponent, memberDialogConfig);
+    this.router.navigate(['/member', member._id]);
   }
 
 }

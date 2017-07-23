@@ -43,7 +43,7 @@ export class MemberAddComponent implements OnInit {
 
     this.dataService.addMember(this.member).then((member) => {
       this.isSavingInProcess = false;
-      this.dialogRef.close();
+      this.dialogRef.close(member);
     });
   }
 }

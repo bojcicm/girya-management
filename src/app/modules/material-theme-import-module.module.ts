@@ -7,7 +7,8 @@ import {
   MdToolbarModule, MdListModule, MdButtonModule,
   MdIconModule, MdCardModule, MdSidenavModule,
   MdDialogModule, MdTableModule, MdInputModule,
-  MdDatepickerModule, MdNativeDateModule, MdCheckboxModule, MdProgressSpinnerModule
+  MdDatepickerModule, MdNativeDateModule, MdCheckboxModule, MdProgressSpinnerModule,
+  MdSnackBarModule
 } from '@angular/material';
 
 let importedMaterialModules: Array<any> = [
@@ -25,7 +26,8 @@ let importedMaterialModules: Array<any> = [
   MdDatepickerModule,
   MdNativeDateModule,
   MdCheckboxModule,
-  MdProgressSpinnerModule
+  MdProgressSpinnerModule,
+  MdSnackBarModule
 ];
 
 @NgModule({
