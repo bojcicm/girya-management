@@ -51,7 +51,7 @@ export class PaymentEditComponent implements OnInit {
       let nextMonth = this.isInAdvance ? this.monthsInAdvance : 1;
       nextSubscription.subscriptionDate = moment(this.subscriptionPayment.subscriptionDate).add(nextMonth, 'M').toDate();
       this.member.subscriptionPayments.push(nextSubscription);
-      this.member.isActive = false;
+      this.member.isActive = true;
     }
     this.dataService.updateMember(this.member).then(member => {
       this.isSavingInProcess = false;

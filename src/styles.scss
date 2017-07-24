@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css"; 
+@import "./girya-theme.scss"; 
 @import "~assets/flexboxgrid.min.css";
 /* Flex grid system definition */
 
@@ -17,4 +17,9 @@ md-sidenav-container,
     margin: 2%;
     min-width: 600px;
     overflow: hidden;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+  text-decoration: inherit;
 }

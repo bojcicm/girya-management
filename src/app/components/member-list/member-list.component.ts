@@ -22,8 +22,8 @@ import 'rxjs/add/observable/fromEvent';
 })
 
 export class MemberListComponent implements OnInit {
-  displayedColumns = ['name', 'phoneNumber', 'info'];
-  memberDataSource: ExampleDataSource | null;
+  displayedColumns = ['name', 'phoneNumber', 'active', 'info'];
+  memberDataSource: MemberFilterDataSource | null;
   selectedMember: Member;
 
   @ViewChild('filter') filter: ElementRef;
@@ -36,7 +36,7 @@ export class MemberListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.memberDataSource = new ExampleDataSource(this.dataService);
+    this.memberDataSource = new MemberFilterDataSource(this.dataService);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
@@ -74,7 +74,7 @@ export class MemberListComponent implements OnInit {
  * the underlying data. Instead, it only needs to take the data and send the table exactly what
  * should be rendered.
  */
-export class ExampleDataSource extends DataSource<any> {
+export class MemberFilterDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject('');
   get filter(): string { return this._filterChange.value; }
   set filter(filter: string) { this._filterChange.next(filter); }

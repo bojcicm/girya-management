@@ -18,7 +18,9 @@ export class MemberAddComponent implements OnInit {
   isCurrentMonthPaid: boolean;
   memberStartDate: Date;
 
-  constructor(private dialogRef: MdDialogRef<MemberAddComponent>, private dataService: DataService) { }
+  constructor(
+    private dialogRef: MdDialogRef<MemberAddComponent>,
+    private dataService: DataService) { }
 
   ngOnInit() {
     this.isSavingInProcess = false;

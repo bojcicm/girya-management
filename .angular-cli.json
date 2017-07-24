@@ -17,7 +17,8 @@
       "tsconfig": "tsconfig.app.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "girya-theme.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

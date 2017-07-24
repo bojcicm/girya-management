@@ -20,6 +20,10 @@ export class DataService {
         });
     }
 
+    get getAllMembers() {
+        return this.dataChange.asObservable();
+    }
+
     getMembers(): Promise<Member[]> {
         return new Promise((resolve, reject) => {
             if (this.allMembers)

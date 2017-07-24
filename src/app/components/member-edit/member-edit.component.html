@@ -1,0 +1,38 @@
+<h2 md-dialog-title>Add new member</h2>
+
+<form #memberForm="ngForm" (ngSubmit)="onSubmit()">
+  <md-card-content>
+    <div class="row">
+      <div class="col-xs-6">
+        <md-input-container>
+          <input mdInput [disabled]="isSavingInProcess" [(ngModel)]="member.name" name="name" placeholder="Full name of member">
+        </md-input-container>
+      </div>
+      <div class="col-xs-6">
+        <md-input-container>
+          <input mdInput [disabled]="isSavingInProcess" placeholder="Phone number" [(ngModel)]="member.phoneNumber" name="phoneNumber">
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <md-checkbox [disabled]="isSavingInProcess" class="checkbox-margin" [(ngModel)]="member.isActive" name="isActive">Je li aktivan?</md-checkbox>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <div class="col-xs-12">
+        <md-input-container style="width: 100%;">
+          <textarea [disabled]="isSavingInProcess" mdInput style="min-height:60px;" placeholder="Subscription details" [(ngModel)]="member.membershipSubscription"
+            name="membershipSubscription"></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </md-card-content>
+
+
+  <md-dialog-actions>
+    <button md-button [disabled]="isSavingInProcess" md-dialog-close>Cancel</button>
+    <button md-button [disabled]="isSavingInProcess" type="submit">Save</button>
+    <md-progress-spinner class="spinner-size" *ngIf="isSavingInProcess" mode="indeterminate"></md-progress-spinner>
+  </md-dialog-actions>
+</form>

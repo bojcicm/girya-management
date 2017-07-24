@@ -1,33 +1,41 @@
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-offset-2 col-xs-8">
     <md-card>
-      <md-card-title>Nadolazece clanarine</md-card-title>
-      <md-card-content>
+      <md-card-content style="max-height: 500px; overflow-y: auto">
         <md-list>
-          <md-list-item *ngFor="let dto of getActiveMembersWithPendingPayment">
-            <md-icon md-list-icon>info</md-icon>
+          <h3 md-subheader>Zakašnjele članarine</h3>
+          <md-list-item *ngFor="let member of missedPaymentMembers | async" class="clickable-list-item" (click)="onSelect(member._id)">
+            <md-icon md-list-icon color="warn">warning</md-icon>
+            <h4 md-line>{{member.name}} </h4>
+            <p md-line>Datum placanja: {{member.subscriptionPayments[0].subscriptionDate | date:"dd MMMM y"}}</p>
+          </md-list-item>
+
+          <md-list-item *ngIf="(missedPaymentMembers | async)?.length == 0">
+            <h4 md-line>Nema zakašnjelih članarina.</h4>
+            <p md-line></p>
+          </md-list-item>
+          <md-list-item></md-list-item>
+
+          <md-divider></md-divider>
+
+          <h3 md-subheader>Nadolazeće članarine</h3>
+
+          <md-list-item *ngIf="(pendingPaymentMembers | async)?.length == 0">
+            <md-icon md-list-icon class="mat-warn">info</md-icon>
+            <h4 md-line>Nema uplata clanarina u sljedecih 7 dana.</h4>
+            <p md-line></p>
+          </md-list-item>
+          <md-list-item *ngFor="let member of pendingPaymentMembers | async" (click)="onSelect(member._id)" class="clickable-list-item">
+            <md-icon md-list-icon color="ascent">info</md-icon>
             <p md-line>{{member.name}} </p>
-            <p md-line>Datum placanja: {{member.subscriptionPayments[0].subscriptionDate | date:"dd/MMMM/y"}}</p>
+            <p md-line>Datum placanja: {{member.subscriptionPayments[0].subscriptionDate | date:"dd MMMM y"}}</p>
           </md-list-item>
         </md-list>
       </md-card-content>
-    </md-card>
-  </div>
-  <div class="col-xs-6">
-    <md-card>
-      <md-card-title>Zakasnjele clanarine</md-card-title>
-      <md-card-content>
-        <md-list>
-          <md-list-item *ngFor="let member of getActiveMembersWithMissedPayment">
-            <md-icon md-list-icon>warning</md-icon>
-            <p md-line>{{member.name}} </p>
-            <p md-line>Datum placanja: {{member.subscriptionPayments[0].subscriptionDate | date:"dd/MMMM/y"}}</p>
-          </md-list-item>
-        </md-list>
-      </md-card-content>
+
     </md-card>
   </div>
 </div>
 
 <button (click)="dropDb()"> drop db </button>
-<button md-fab class="add-member-fab" (click)="openAddMemberDialog()"><md-icon>add</md-icon></button>
+<button md-fab class="add-member-fab" (click)="openAddMemberDialog()" mdTooltip="Add member" [mdTooltipPosition]="'above'"><md-icon>add</md-icon></button>

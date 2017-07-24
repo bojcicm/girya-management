@@ -4,6 +4,7 @@ import { Member, PaidSubscription } from '../../model/member';
 import { DataService } from '../../services/data/data.service';
 import { MdDialog, MdDialogConfig } from '@angular/material';
 import { PaymentEditComponent } from '../payment-edit/payment-edit.component';
+import { MemberEditComponent } from '../member-edit/member-edit.component'
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -48,5 +49,13 @@ export class MemberDetailComponent implements OnInit {
     };
 
     let paymentDialog = this.dialog.open(PaymentEditComponent, paymentDialogConfig);
+  }
+
+  editDetails() {
+    let editDetailsDialogConfig = new MdDialogConfig();
+    editDetailsDialogConfig.width = '500px';
+    editDetailsDialogConfig.data = this.member;
+
+    let memberDialog = this.dialog.open(MemberEditComponent, editDetailsDialogConfig);
   }
 }

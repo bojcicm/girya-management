@@ -14,6 +14,7 @@ import { MemberListComponent } from './components/member-list/member-list.compon
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MemberAddComponent } from './components/member-add/member-add.component';
 import { PaymentEditComponent } from './components/payment-edit/payment-edit.component';
+import { MemberEditComponent } from './components/member-edit/member-edit.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PaymentEditComponent } from './components/payment-edit/payment-edit.com
     MemberListComponent,
     DashboardComponent,
     MemberAddComponent,
-    PaymentEditComponent
+    PaymentEditComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,7 @@ import { PaymentEditComponent } from './components/payment-edit/payment-edit.com
     MaterialThemeImportModuleModule
   ],
   entryComponents: [
-    MemberDetailComponent, MemberAddComponent, PaymentEditComponent
+    MemberDetailComponent, MemberAddComponent, PaymentEditComponent, MemberEditComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

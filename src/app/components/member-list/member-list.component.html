@@ -19,12 +19,17 @@
       <md-cell *cdkCellDef="let row"> {{row.phoneNumber}}</md-cell>
     </ng-container>
 
+    <ng-container cdkColumnDef="active">
+      <md-header-cell *cdkHeaderCellDef> Je li aktivan?</md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.isActive ? "Da" : "Ne"}}</md-cell>
+    </ng-container>
+
     <ng-container cdkColumnDef="info">
       <md-header-cell *cdkHeaderCellDef> Detalji </md-header-cell>
       <md-cell *cdkCellDef="let row">
-        <a (click)="onSelect(row)">
+        <button md-icon-button (click)="onSelect(row)">
           <md-icon>info</md-icon>
-        </a>
+        </button>
       </md-cell>
     </ng-container>
 

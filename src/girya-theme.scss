@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$girya-app-primary: mat-palette($mat-indigo, 900);       // Brown  <-- CUSTOM COLOR HERE!
+$girya-app-accent:  mat-palette($mat-purple, 500);      // Green  <-- CUSTOM COLOR HERE!
+
+$girya-app-warn:    mat-palette($mat-deep-orange, 500); // Orange <-- CUSTOM COLOR HERE!
+
+$girya-app-theme: mat-light-theme($girya-app-primary, $girya-app-accent, $girya-app-warn);
+
+@include angular-material-theme($girya-app-theme);
