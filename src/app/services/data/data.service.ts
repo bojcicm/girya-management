@@ -24,9 +24,9 @@ export class DataService {
         return this.dataChange.asObservable();
     }
 
-    getMembers(): Promise<Member[]> {
+    getMembers(forceReload?: boolean): Promise<Member[]> {
         return new Promise((resolve, reject) => {
-            if (this.allMembers)
+            if (this.allMembers && !forceReload)
                 resolve(this.allMembers);
 
             this.db.find({}).exec((err, allMembersPaginated) => {
@@ -66,6 +66,10 @@ export class DataService {
                     console.log(err);
                     reject(err);
                 }
+                this.getMembers(true).then(members => {
+                    this.allMembers = members;
+                    this.dataChange.next(this.allMembers);
+                });
                 resolve(member);
             })
         })

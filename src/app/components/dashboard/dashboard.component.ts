@@ -57,12 +57,8 @@ export class DashboardComponent implements OnInit {
     let latestSubscription = memberSubscriptions[0];
     let subscriptionDate = moment(latestSubscription.subscriptionDate);
     let daydiff = this.today.diff(subscriptionDate, 'days');
-    if (daydiff > 7 && !latestSubscription.isPaid)
+    if (daydiff > 0 && !latestSubscription.isPaid)
       return m;
-  }
-
-  dropDb() {
-    //this.dataService.dropdb();
   }
 
   openAddMemberDialog() {

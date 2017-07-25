@@ -11,7 +11,7 @@
         <md-card-actions>
           <div class="row">
             <div class="col-xs-1 col-xs-offset-10" *ngIf="areAllPaymentsPaid()">
-              <button md-icon-button (click)="paySubscription()" mdTooltip="Dodaj uplatu" [mdTooltipPosition]="'above'"><md-icon>add</md-icon></button>
+              <button md-icon-button (click)="addPayment()" mdTooltip="Dodaj uplatu" [mdTooltipPosition]="'above'"><md-icon>add</md-icon></button>
             </div>
             <div class="col-xs-1" [ngClass]="{'col-xs-offset-11': !areAllPaymentsPaid()}">
               <button md-icon-button mdTooltip="Izmjeni podatke" [mdTooltipPosition]="'above'" (click)="editDetails()"><md-icon>edit</md-icon></button>
@@ -29,11 +29,12 @@
     </div>
     <md-divider></md-divider>
     <md-list-item *ngFor="let payment of memberPayments">
-      <md-icon md-list-icon *ngIf="payment.isPaid">done</md-icon>
+      <md-icon md-list-icon *ngIf="payment.isPaid" color="primary">done</md-icon>
       <md-icon md-list-icon *ngIf="!payment.isPaid" color="warn">error</md-icon>
       <p md-line>Datum uplate: <b>{{payment.subscriptionDate | date:"dd - MMMM - y"}}</b></p>
-      <button md-button *ngIf="!payment.isPaid" (click)="paySubscription(payment)">Uplati</button>
+      <button md-button *ngIf="!payment.isPaid" (click)="edit(payment)">Uplati</button>
       <button md-button *ngIf="payment.isPaid" (click)="details(payment)">Detalji</button>
+      <button md-icon-button (click)="delete(payment)"><md-icon color="warn">close</md-icon></button>
     </md-list-item>
   </md-list>
 </div>

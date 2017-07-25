@@ -18,6 +18,7 @@ export class PaymentEditComponent implements OnInit {
   isSavingInProcess: boolean;
   member: Member;
   subscriptionPayment: PaidSubscription;
+  isDetails: boolean;
 
   constructor(
     @Inject(MD_DIALOG_DATA) public data: IPaymentDialogData,
@@ -25,6 +26,7 @@ export class PaymentEditComponent implements OnInit {
     private dataService: DataService) { }
 
   ngOnInit() {
+
     if (this.data && this.data.member)
       this.member = this.data.member;
 
@@ -35,6 +37,10 @@ export class PaymentEditComponent implements OnInit {
     else {
       this.subscriptionPayment = new PaidSubscription();
       this.subscriptionDate = new Date();
+    }
+
+    if (this.data && this.data.isDetailsView) {
+      this.isDetails = true;
     }
   }
 
@@ -64,4 +70,5 @@ export class PaymentEditComponent implements OnInit {
 interface IPaymentDialogData {
   member: Member;
   payment?: PaidSubscription;
+  isDetailsView?: boolean;
 }

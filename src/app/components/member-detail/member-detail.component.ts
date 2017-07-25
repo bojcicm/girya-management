@@ -40,15 +40,45 @@ export class MemberDetailComponent implements OnInit {
     return this.member.subscriptionPayments.every(p => p.isPaid);
   }
 
-  paySubscription(payment: PaidSubscription) {
+  addPayment() {
+    let newSub = new PaidSubscription();
+    newSub.subscriptionDate = new Date();
+    this.member.subscriptionPayments.push(newSub);
+    this.edit(newSub);
+  }
+
+  edit(payment: PaidSubscription) {
     let paymentDialogConfig = new MdDialogConfig();
     paymentDialogConfig.width = '500px';
     paymentDialogConfig.data = {
       payment: payment,
       member: this.member
     };
+    this.openPaymentDialog(paymentDialogConfig);
+  }
 
-    let paymentDialog = this.dialog.open(PaymentEditComponent, paymentDialogConfig);
+  details(payment: PaidSubscription) {
+    let paymentDialogConfig = new MdDialogConfig();
+    paymentDialogConfig.width = '500px';
+    paymentDialogConfig.data = {
+      payment: payment,
+      member: this.member,
+      isDetailsView: true
+    };
+    this.openPaymentDialog(paymentDialogConfig);
+  }
+
+  private openPaymentDialog(config: MdDialogConfig) {
+    let paymentDialog = this.dialog.open(PaymentEditComponent, config);
+  }
+
+  delete(payment: PaidSubscription) {
+    if (confirm("Izbriši plaćanje?")) {
+      this.member.subscriptionPayments = this.member.subscriptionPayments
+        .filter(p => p.subscriptionDate != payment.subscriptionDate);
+
+      this.dataService.updateMember(this.member);
+    }
   }
 
   editDetails() {

@@ -1,27 +1,27 @@
 <h2 md-dialog-title>Uplata</h2>
 <form #paymentEditForm="ngForm" (ngSubmit)="onSubmit()">
-  <md-dialog-content>
+  <md-dialog-content style="min-height:150px;">
     <div class="row">
       <div class="col-xs-6">
         <md-input-container>
-          <input mdInput [disabled]="isSavingInProcess" placeholder="Datum uplate" [mdDatepicker]="myDatepicker" [(ngModel)]="subscriptionPayment.subscriptionDate"
+          <input mdInput [disabled]="isSavingInProcess || isDetails" placeholder="Datum uplate" [mdDatepicker]="myDatepicker" [(ngModel)]="subscriptionPayment.subscriptionDate"
             name="subscriptionDate">
-          <button mdSuffix [disabled]="isSavingInProcess" [mdDatepickerToggle]="myDatepicker"></button>
+          <button mdSuffix [disabled]="isSavingInProcess || isDetails" [mdDatepickerToggle]="myDatepicker"></button>
         </md-input-container>
         <md-datepicker #myDatepicker></md-datepicker>
       </div>
     </div>
     <div class="row">
-      <md-checkbox [(ngModel)]="isMemberStaying" name="isMemberStaying" [disabled]="isSavingInProcess">
+      <md-checkbox [(ngModel)]="isMemberStaying" name="isMemberStaying" [disabled]="isSavingInProcess || isDetails">
         Član nastavlja preplatu?
       </md-checkbox>
     </div>
-    <div class="row">
-      <md-checkbox [(ngModel)]="isInAdvance" name="isInAdvance" [disabled]="isSavingInProcess">
+    <div class="row" *ngIf="!isDetails">
+      <md-checkbox [(ngModel)]="isInAdvance" name="isInAdvance" [disabled]="isSavingInProcess || isDetails">
         Plaća li se više uplata?
       </md-checkbox>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!isDetails">
       <md-input-container *ngIf="isInAdvance">
         <input type="number" min="1" mdInput [disabled]="isSavingInProcess" placeholder="Koliko uplata?" [(ngModel)]="monthsInAdvance"
           name="monthsInAdvance">
@@ -30,7 +30,7 @@
   </md-dialog-content>
   <md-dialog-actions>
     <button md-button md-dialog-close>Cancel</button>
-    <button md-button type="submit">Save</button>
+    <button md-button type="submit" *ngIf="!isDetails">Save</button>
     <md-progress-spinner class="spinner-size" *ngIf="isSavingInProcess" mode="indeterminate"></md-progress-spinner>
   </md-dialog-actions>
 </form>
