@@ -15,19 +15,19 @@ app.on('ready', () => {
         width: 1000, height: 600,
         autoHideMenuBar: true,
         title: 'Girya Membership',
-        icon: 'src/favicon.ico',
+        icon: 'gym.ico',
         nodeIntegration: true
     });
-    if (process.env.PACKAGE === 'true') {
-        win.loadURL(url.format({
-            pathname: path.join(__dirname, 'dist/index.html'),
-            protocol: 'file:',
-            slashes: true
-        }));
-    } else {
-        win.loadURL(process.env.HOST);
-        win.webContents.openDevTools();
-    }
+    // if (process.env.PACKAGE === 'true') {
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, 'dist/index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+    // } else {
+    //     win.loadURL(process.env.HOST);
+    //     win.webContents.openDevTools();
+    // }
 
     win.on('closed', () => {
         win = null;

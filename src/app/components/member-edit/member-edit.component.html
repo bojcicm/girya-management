@@ -1,4 +1,4 @@
-<h2 md-dialog-title>Add new member</h2>
+<h2 md-dialog-title>Edit member</h2>
 
 <form #memberForm="ngForm" (ngSubmit)="onSubmit()">
   <md-card-content>
@@ -33,6 +33,7 @@
   <md-dialog-actions>
     <button md-button [disabled]="isSavingInProcess" md-dialog-close>Cancel</button>
     <button md-button [disabled]="isSavingInProcess" type="submit">Save</button>
+    <button md-button [disabled]="isSavingInProcess" color="warn" (click)="deleteMember()">Delete</button>
     <md-progress-spinner class="spinner-size" *ngIf="isSavingInProcess" mode="indeterminate"></md-progress-spinner>
   </md-dialog-actions>
 </form>

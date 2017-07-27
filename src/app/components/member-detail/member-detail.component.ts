@@ -1,5 +1,5 @@
 import { Component, Input, Inject, Optional, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Member, PaidSubscription } from '../../model/member';
 import { DataService } from '../../services/data/data.service';
 import { MdDialog, MdDialogConfig } from '@angular/material';
@@ -19,7 +19,8 @@ export class MemberDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private dialog: MdDialog) {
+    private dialog: MdDialog,
+    private router: Router) {
   }
 
   ngOnInit() {

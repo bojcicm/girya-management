@@ -75,6 +75,22 @@ export class DataService {
         })
     }
 
+    deleteMember(member: Member) {
+        return new Promise((resolve, reject) => {
+            this.db.remove({ _id: member._id }, {}, (e, d) => {
+                if (e)
+                    reject(e);
+
+                this.getMembers(true).then(members => {
+                    this.allMembers = members;
+                    this.dataChange.next(this.allMembers);
+                });
+
+                resolve();
+            });
+        })
+    }
+
     dropdb() {
         this.db.remove({}, { multi: true }, (e, d) => {
             console.log(d);
